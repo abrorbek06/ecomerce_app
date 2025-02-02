@@ -3,34 +3,13 @@ import 'package:flutter/cupertino.dart';
 
 abstract class AppStyles {
   static const titleStyle = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    color: AppColors.mainColor,
-  ); static const ramadantitleStyle = TextStyle(
-    fontSize: 20,
+    fontSize: 34,
     fontWeight: FontWeight.bold,
     color: AppColors.mainColor,
   );
-  static const developedStyle = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.bold,
-    color: AppColors.mainColor,
-  );
-  static const noAdsStyle = TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.w400,
-    color: AppColors.mainColor,
-  );
-  static const hijri = TextStyle(
-    fontSize: 10,
-    fontWeight: FontWeight.w300,
-    color: AppColors.gray,
-  );
-  static const tasbih_soni = TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.bold,
-    color: AppColors.gray,
-      fontFamily: "Inter"
-
+  static const enterScreenText = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: AppColors.white,
   );
 }
