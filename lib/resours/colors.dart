@@ -9,5 +9,6 @@ abstract class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const gray = Color(0xFF9F9B9B);
   static const shadowColor = Color(0xFF787878);
+  static const descriptionColor = Color(0xFF33415C);
 
 }

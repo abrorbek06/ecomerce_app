@@ -12,4 +12,19 @@ abstract class AppStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.white,
   );
+  static const LoginTitleText = TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.bold,
+    color: AppColors.mainColor,
+  );
+  static const LoginTDescriptionText = TextStyle(
+    fontSize: 23,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textColor,
+  );
+  static const description = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.descriptionColor,
+  );
 }

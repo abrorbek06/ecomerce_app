@@ -1,5 +1,8 @@
 import 'package:ecomerce_app/resours/assets.dart';
 import 'package:ecomerce_app/resours/styles.dart';
+import 'package:ecomerce_app/screens/home_screen.dart';
+import 'package:ecomerce_app/screens/login_screen.dart';
+import 'package:ecomerce_app/widgets/Wbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -39,35 +42,20 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                 ),
               ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 41, vertical: 54),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 41, vertical: 54),
                 child: Column(
                   children: [
-                    const Text(
+                    Text(
                       "Ready to explore beyond boundaries?",
                       style: AppStyles.titleStyle,
                       textAlign: TextAlign.center,
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 48,
-                      decoration: BoxDecoration(
-                          color: AppColors.mainColor,
-                          borderRadius: BorderRadius.circular(56)),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Your Journey Starts Here',
-                            style: AppStyles.enterScreenText,
-                          ),
-                        ],
-                      ),
-                    )
+                    SizedBox(height: 20),
+                    Wbutton(text: "Your Journey Starts Here", screen: LoginScreen(),),
                   ],
                 ),
-              ),
+              )
             ),
           ],
         ),
