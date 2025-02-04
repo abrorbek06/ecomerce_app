@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       const SizedBox(height: 40),
-                      Text("I don’t have a account?", style: AppStyles.description,)
+                      const Text("I don’t have a account?", style: AppStyles.description,)
                     ],
                   ),
                 ),
