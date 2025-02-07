@@ -1,4 +1,5 @@
 import 'package:ecomerce_app/resours/styles.dart';
+import 'package:ecomerce_app/screens/home_screen.dart';
 import 'package:ecomerce_app/widgets/Wbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -62,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _TextFeild('Password'),
                       const Align(alignment: Alignment(1, 0) ,child: Text("Forgot password?", style: AppStyles.description,),),
                       const SizedBox(height: 33),
-                      const Wbutton(text: "Sign In", screen: LoginScreen()),
+                      const Wbutton(text: "Sign In", screen: HomeScreen()),
                       const SizedBox(height: 20),
                       const Text("or sign in with", style: AppStyles.description,),
                       const SizedBox(height: 20),
