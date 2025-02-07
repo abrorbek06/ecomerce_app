@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 
 import '../resours/assets.dart';
 import '../resours/colors.dart';
-import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
