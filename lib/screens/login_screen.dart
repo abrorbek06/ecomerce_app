@@ -63,20 +63,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       _TextFeild('Password'),
                       const Align(alignment: Alignment(1, 0) ,child: Text("Forgot password?", style: AppStyles.description,),),
                       const SizedBox(height: 33),
-                      const Wbutton(text: "Sign In", screen: HomeScreen()),
+                      const Wbutton(text: "Sign In", screen: LoginScreen()),
                       const SizedBox(height: 20),
                       const Text("or sign in with", style: AppStyles.description,),
                       const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _SocialMedias(Assets.googleLogo),
-                          _SocialMedias(Assets.appleLogo),
-                          _SocialMedias(Assets.facebookLogo),
+                          _SocailMedia(Assets.googleLogo),
+                          _SocailMedia(Assets.appleLogo),
+                          _SocailMedia(Assets.facebookLogo),
                         ],
                       ),
                       const SizedBox(height: 40),
-                      const Text("I don’t have a account?", style: AppStyles.description,)
+                      const Text('I don’t have a account?', style: AppStyles.description,)
                     ],
                   ),
                 ),
@@ -87,10 +87,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 48,
                 decoration: BoxDecoration(
                   color: AppColors.white,
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(30)
                 ),
-                child: Center(child: Text("Sing Up", style: AppStyles.enterScreenText.copyWith(color: AppColors.mainColor, fontWeight: FontWeight.bold),)),
-              )
+                child: Center(child: Text("Sing Up", style: AppStyles.LoginTitleText.copyWith(fontSize: 18),)),
+              ),
             ],
           ),
         ),
@@ -132,24 +132,24 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     ),
   );
-  _SocialMedias(icon) => Container(
+  _SocailMedia(String icon) => Container(
     width: 75,
-    height: 65,
+    height: 55,
     decoration: BoxDecoration(
-      color: AppColors.white,
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(10),
       boxShadow: const [
         BoxShadow(
           color: AppColors.shadowColor,
-          offset: Offset(-3, 10),
-          blurRadius: 13,
-          spreadRadius: -5
-        )
-      ],
-      borderRadius: BorderRadius.circular(10)
+          spreadRadius: -5,
+          blurRadius: 10,
+          offset: Offset(0, 0),
+        ),
+      ]
     ),
     child: Padding(
       padding: const EdgeInsets.all(12.0),
-      child: SvgPicture.asset(icon,),
+      child: SvgPicture.asset(icon),
     ),
   );
 }
