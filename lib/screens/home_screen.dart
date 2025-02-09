@@ -71,10 +71,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                   color: AppColors.white,
                   borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: AppColors.gray
+                  )
                 ),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 16),
                   child: Column(
                     children: [
                       Row(
@@ -95,23 +98,27 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          const Text("24 March 2024", style: TextStyle(color: AppColors.black, fontSize: 12, fontWeight: FontWeight.w300),)
+                          const Text(
+                            "24 March 2024",
+                            style: TextStyle(
+                                color: AppColors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w300),
+                          )
                         ],
                       ),
                       const SizedBox(width: 14),
-                      Row(
+                      const Row(
                         children: [
                           Column(
-                            children: [
-
-                            ],
+                            children: [],
                           )
                         ],
                       )
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
