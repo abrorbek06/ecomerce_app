@@ -30,9 +30,10 @@ class NewsApiService {
 class WeatherService {
   static const String apiKey = '6418b539e0697f54de8a3df65ebe9444';
   static const String baseUrl = 'http://api.openweathermap.org/data/2.5/weather';
+  static const String language = 'en';
 
   Future<Map<String, dynamic>> fetchWeather(String city) async {
-    final Uri url = Uri.parse('$baseUrl?q=$city&appid=$apiKey&units=metric&lang=ru');
+    final Uri url = Uri.parse('$baseUrl?q=$city&appid=$apiKey&units=metric&lang=$language');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
