@@ -24,7 +24,17 @@ abstract class AppStyles {
   );
   static const description = TextStyle(
     fontSize: 14,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.bold,
+    color: AppColors.black,
+  );
+  static const author = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textColor,
+  );
+  static const nameStyle = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
     color: AppColors.descriptionColor,
   );
 }

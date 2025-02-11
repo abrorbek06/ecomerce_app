@@ -11,4 +11,5 @@ class Assets{
   static const facebookLogo = '$pathIcon/facebook.svg';
   static const appbar_icon = '$pathIcon/appbar_icon.svg';
   static const cat_ava = 'assets/cat_ava.jpg';
+  static const logoSVG = '$pathIcon/logo.svg';
 }

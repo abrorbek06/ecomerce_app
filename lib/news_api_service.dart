@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class NewsApiService {
@@ -14,6 +15,10 @@ class NewsApiService {
         final Map<String, dynamic> jsonData = jsonDecode(response.body);
         if (jsonData['status'] == 'ok') {
           return jsonData['articles'];
+        } else if (response.statusCode == 400){
+          throw Exception('Internet not connaction');
+        } else if (response.statusCode == 404) {
+          throw Exception('404');
         } else {
           return [];
         }
@@ -38,7 +43,11 @@ class WeatherService {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
-      } else {
+      } else if (response.statusCode == 400){
+        throw Exception('Internet not connaction');
+      } else if (response.statusCode == 404) {
+        throw Exception('404');
+      }else {
         throw Exception('City not found');
       }
     } catch (e) {

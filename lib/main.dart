@@ -1,6 +1,4 @@
-import 'package:ecomerce_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-
 import 'screens/home_screen.dart';
 
 void main(){
@@ -17,9 +15,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: NewsApp(),
     );
   }
 }
