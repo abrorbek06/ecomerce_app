@@ -2,9 +2,10 @@ import 'package:ecomerce_app/news_api_service.dart';
 import 'package:ecomerce_app/resours/assets.dart';
 import 'package:ecomerce_app/resours/colors.dart';
 import 'package:ecomerce_app/resours/styles.dart';
-import 'package:ecomerce_app/screens/WebViewScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'WebViewScreen.dart';
 
 class WeatherApp extends StatefulWidget {
   @override
@@ -127,26 +128,32 @@ class _WeatherAppState extends State<WeatherApp> {
       );
 }
 
-class NewsApp extends StatefulWidget {
+class NewsScreen extends StatefulWidget {
   @override
-  _NewsAppState createState() => _NewsAppState();
+  _NewsScreenState createState() => _NewsScreenState();
 }
 
-class _NewsAppState extends State<NewsApp> {
-  final NewsApiService _newsApiService = NewsApiService();
-  TextEditingController _searchController = TextEditingController();
-  List<dynamic> _articles = [];
+class _NewsScreenState extends State<NewsScreen> {
+  final NewsService _newsService = NewsService();
+  final TextEditingController _searchController = TextEditingController();
+  List<Map<String, dynamic>> _news = [];
   bool _isLoading = false;
 
-  void _searchNews() async {
+  @override
+  void initState() {
+    super.initState();
+    _fetchLatestNews(); // Ilova ochilganda eng so‘nggi yangiliklarni yuklaydi
+  }
+
+  void _fetchLatestNews() async {
     setState(() {
       _isLoading = true;
     });
+
     try {
-      final articles = await _newsApiService.fetchNews(_searchController.text);
+      final data = await _newsService.fetchNews();
       setState(() {
-        print(articles);
-        _articles = articles;
+        _news = data;
       });
     } catch (e) {
       ScaffoldMessenger.of(context)
@@ -158,87 +165,103 @@ class _NewsAppState extends State<NewsApp> {
     }
   }
 
+  void _searchNews() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final data =
+          await _newsService.fetchNews(keyword: _searchController.text);
+      setState(() {
+        _news = data;
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  void _clearSearch() {
+    _searchController.clear();
+    _fetchLatestNews(); // Qidiruv bo‘sh kiritilsa, yana eng so‘nggi yangiliklar chiqadi
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.white,
-        title: SvgPicture.asset(Assets.logoSVG),
+        title: SvgPicture.asset(Assets.logoSVG, width: 100),
         centerTitle: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
             _getSearch(),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             _isLoading
                 ? const CircularProgressIndicator()
                 : Expanded(
                     child: ListView.builder(
-                      itemCount: _articles.length,
+                      itemCount: _news.length,
                       itemBuilder: (context, index) {
-                        final article = _articles[index];
                         return GestureDetector(
-                          onTap: () {
-                            _openArticle(
-                              context,
-                              article['title'] ?? 'No Title',
-                              article['urlToImage'] ?? 'No Title',
-                              article['description'] ?? 'No Title',
-                              article['author'] ?? 'No Title',
-                              article['name'] ?? 'No Title',
-                            );
-                          },
-                          child: SizedBox(
-                            height: 330,
-                            width: double.infinity,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => Webviewscreen(
+                                  title: _news[index]['title'],
+                                  image: _news[index]['imageUrl'],
+                                  description: _news[index]['description'],
+                                  author: _news[index]['author'],
+                                  name: _news[index]['name'],
+                                  ),
+                            ),
+                          ),
+                          child: Card(
+                              color: AppColors.white,
+                              elevation: 1,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
                                     width: double.infinity,
-                                    height: 183,
+                                    height: 200,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6),
-                                      image: DecorationImage(
-                                        image: article['urlToImage'] != null
-                                            ? NetworkImage(
-                                                article['urlToImage'])
-                                            : AssetImage(Assets.logoSVG),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                            image: _news[index]['imageUrl'] !=
+                                                    ''
+                                                ? NetworkImage(
+                                                    _news[index]['imageUrl'])
+                                                : const AssetImage(
+                                                    Assets.airplane),
+                                            fit: BoxFit.cover)),
                                   ),
-                                  const Text(""),
-                                  const SizedBox(height: 8),
+                                  Text(_news[index]['author'],
+                                      style: AppStyles.author),
+                                  const SizedBox(height: 12),
+                                  Text(_news[index]['title'],
+                                      style: AppStyles.description),
+                                  const SizedBox(height: 5),
+                                  Text(_news[index]['description'],
+                                      style: const TextStyle(
+                                          color: AppColors.secondryColor)),
+                                  const SizedBox(height: 5),
                                   Text(
-                                    article['author'] ?? 'No Title',
-                                    style: AppStyles.author,
+                                    'Published on: ${_news[index]['publishedAt']}',
+                                    style: AppStyles.description
+                                        .copyWith(color: AppColors.textColor),
                                   ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    article['title'] ?? 'No Title',
-                                    style: AppStyles.description,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        article['source']['name'] ?? 'No Title',
-                                        style: AppStyles.nameStyle,
-                                      ),
-                                      // Text(article['publishedAt'] ?? 'No Title', style: AppStyles.nameStyle,),
-                                    ],
-                                  )
+                                  const SizedBox(height: 10),
                                 ],
-                              ),
-                            ),
-                          ),
+                              )),
                         );
                       },
                     ),
@@ -285,18 +308,9 @@ class _NewsAppState extends State<NewsApp> {
           ),
         ),
       );
-  void _openArticle(BuildContext context, String title, String image, String description, String author, String name) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Webviewscreen(
-            title: title,
-            image: image,
-            description: description,
-            author: author,
-            name: name,
-          ),
-        ),
-      );
+
+  void _openArticle(BuildContext context, String title, String author,
+      String description, String image, String name) {
+    if (title != null) {}
   }
 }

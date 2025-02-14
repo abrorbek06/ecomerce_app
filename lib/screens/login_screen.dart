@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _TextFeild('Password'),
                       const Align(alignment: Alignment(1, 0) ,child: Text("Forgot password?", style: AppStyles.description,),),
                       const SizedBox(height: 33),
-                      Wbutton(text: "Sign In", screen: NewsApp()),
+                      Wbutton(text: "Sign In", screen: NewsScreen()),
                       const SizedBox(height: 20),
                       const Text("or sign in with", style: AppStyles.description,),
                       const SizedBox(height: 20),
